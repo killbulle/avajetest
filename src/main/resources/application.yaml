@@ -1,18 +1,14 @@
-config:
-  watch:
-    enabled: true
-    delay: 10
-    period: 5   ## check every 5 seconds
+micronaut:
+  application:
+    name: graalvm-watchdog
 
-strat:
-  activateFoo: true
-  fooName: Hello
-  fooHome: ${HOME}/config
-  fooprops:  ${strat.key:bart}
-  togglefeatures: true
-  togglefeaturesA: false
-  bar:
-    barRules: 42
-    barDouble: 33.3
-
-
+watchdog:
+  target-pid: ${TARGET_PID:1}
+  poll-interval: ${WATCHDOG_POLL_INTERVAL:5s}
+  cpu-idle-timeout: ${WATCHDOG_CPU_IDLE_TIMEOUT:30s}
+  procfs:
+    root: ${WATCHDOG_PROC_ROOT:/proc}
+    ticks-per-second: ${WATCHDOG_PROC_TICKS:100}
+  attach:
+    enabled: ${WATCHDOG_ATTACH_ENABLED:true}
+    timeout: ${WATCHDOG_ATTACH_TIMEOUT:5s}
